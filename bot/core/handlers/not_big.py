@@ -31,7 +31,7 @@ async def handle_not_big(
         caption = ""
     parse_mode = "Markdown"
     if thumb:
-        _thumb = await c.download_media(thumb, f"{Config.DOWNLOAD_DIR}/{cb.from_user.id}/{cb.message_id}/")
+        _thumb = await c.download_media(thumb, f"{Config.DOWNLOAD_DIR}/{cb.from_user.id}/{cb.message.message_id}/")
     else:
         _thumb = None
     upload_as_doc = await db.get_upload_as_doc(cb.from_user.id)
