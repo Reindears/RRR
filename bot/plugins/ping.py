@@ -15,7 +15,7 @@ async def ping_handler(c: Client, m: "types.Message"):
     await c.send_flooded_message(
         chat_id=m.chat.id,
         
-        text="👋🏻 Hey, Dear {}\n\nI'm a File Renamer Bot\n\nRefer help for my usage\n\nMade with ❤️ by @Sybots".format(m.from_user.mention),
+        text="**👋🏻 Hey, Dear {}\n\nI'm a File Renamer Bot\n\nRefer help for my usage\n\nMade with ❤️ by @Sybots**".format(m.from_user.mention),
         reply_markup=types.InlineKeyboardMarkup([[
            types.InlineKeyboardButton("Help",
                                       callback_data="showSettings"),
