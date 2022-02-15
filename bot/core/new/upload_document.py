@@ -77,4 +77,4 @@ class UploadDocument:
                 c_time
             )
         )
-        await editable_message.edit("Uploaded Successfully!")
+        await editable_message.delete()
