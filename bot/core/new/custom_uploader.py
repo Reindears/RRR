@@ -50,7 +50,7 @@ class CustomUploader(Scaffold):
         progress: callable,
         progress_args: tuple = ()
     ):
-        dc_id = file_id.dc_id
+        dc_id = 1
 
         async with self.media_sessions_lock:
             session = self.media_sessions.get(dc_id, None)
