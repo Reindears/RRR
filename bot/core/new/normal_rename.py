@@ -59,7 +59,7 @@ class NormalRename(Scaffold):
                 f"{Config.DOWNLOAD_DIR}/{chat_id}/{time.time()}/",
                 progress=progress_for_pyrogram,
                 progress_args=(
-                    "Downloading ...",
+                    "Uploading to Telegram",
                     editable,
                     c_time
                 )
