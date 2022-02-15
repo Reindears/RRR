@@ -3,6 +3,8 @@
 import time
 import mimetypes
 import traceback
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+
 from bot.client import (
     Client
 )
