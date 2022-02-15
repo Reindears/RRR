@@ -131,9 +131,9 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
     if user_input_msg.text and user_input_msg.text.startswith("/"):
         await editable.edit("Process Cancelled!")
         return await user_input_msg.continue_propagation()
-    _raw_file_name = get_media_file_name(cb.reply_to_message)
+    _raw_file_name = get_media_file_name(cb.message.message.reply_to_message)
     if not _raw_file_name:
-        _file_ext = mimetypes.guess_extension(get_file_attr(cb.reply_to_message).mime_type)
+        _file_ext = mimetypes.guess_extension(get_file_attr(cb.message.reply_to_message).mime_type)
         _raw_file_name = "UnknownFileName" + _file_ext
     if user_input_msg.text.rsplit(".", 1)[-1].lower() != _raw_file_name.rsplit(".", 1)[-1].lower():
         file_name = user_input_msg.text.rsplit(".", 1)[0][:255] + "." + _raw_file_name.rsplit(".", 1)[-1].lower()
