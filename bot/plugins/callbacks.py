@@ -48,9 +48,9 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
             await c.send_photo(cb.message.chat.id, thumbnail,
                                reply_markup=types.InlineKeyboardMarkup([[
                                    types.InlineKeyboardButton("🔄 Update",
-                                                              callback_data="setThumbnail")
-                               ],
-                                 [  types.InlineKeyboardButton("🗑 Delete",
+                                                              callback_data="setThumbnail"),
+                               
+                                  types.InlineKeyboardButton("🗑 Delete",
                                                               callback_data="deleteThumbnail")
                                ]
                                ]))
@@ -113,9 +113,9 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
                 parse_mode="Markdown",
                                reply_markup=types.InlineKeyboardMarkup([[
                                    types.InlineKeyboardButton("🔄 Update",
-                                                              callback_data="setCustomCaption")
-                               ],
-                                [   types.InlineKeyboardButton("🗑 Delete",
+                                                              callback_data="setCustomCaption"),
+                               
+                                  types.InlineKeyboardButton("🗑 Delete",
                                                               callback_data="triggerApplyDefaultCaption")
                                ]
                                ]))
