@@ -160,7 +160,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
         file_name = user_input_msg.text.rsplit(".", 1)[0][:255] + "." + _raw_file_name.rsplit(".", 1)[-1].lower()
     else:
         file_name = user_input_msg.text[:255]
-    await editable.edit("💡")
+    await cb.message.edit("💡")
     is_big = get_media_file_size(cb.message.reply_to_message) > (10 * 1024 * 1024)
     if not is_big:
         _default_thumb_ = await db.get_thumbnail(cb.from_user.id)
