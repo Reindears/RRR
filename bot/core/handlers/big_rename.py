@@ -199,4 +199,4 @@ async def handle_big_rename(
         Config.LOGGER.getLogger(__name__).error(_err)
         Config.LOGGER.getLogger(__name__).info(f"{traceback.format_exc()}")
     else:
-        await editable.edit("Uploaded Successfully!")
+        await editable.delete()
