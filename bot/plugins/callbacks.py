@@ -42,12 +42,12 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
     elif cb.data == "showThumbnail":
         thumbnail = await db.get_thumbnail(cb.from_user.id)
         if not thumbnail:
-            await cb.answer("You didn't set any custom thumbnail!", show_alert=True)
+            await cb.answer("No thumbnail found!", show_alert=True)
         else:
             await cb.answer()
-            await c.send_photo(cb.message.chat.id, thumbnail, "Custom Thumbnail",
+            await c.send_photo(cb.message.chat.id, thumbnail,
                                reply_markup=types.InlineKeyboardMarkup([[
-                                   types.InlineKeyboardButton("Delete Thumbnail",
+                                   types.InlineKeyboardButton("🗑 Delete Thumbnail",
                                                               callback_data="deleteThumbnail")
                                ]]))
             
@@ -55,7 +55,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
 
     elif cb.data == "deleteThumbnail":
         await db.set_thumbnail(cb.from_user.id, None)
-        await cb.answer("Okay, I deleted your custom thumbnail. Now I will apply default thumbnail.", show_alert=True)
+        await cb.answer("Thumbnail cleared!", show_alert=True)
         await cb.message.delete(True)
     elif cb.data == "setThumbnail":
         await cb.answer()
@@ -75,9 +75,8 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
                                   ))
     elif cb.data == "setCustomCaption":
         await cb.answer()
-        await cb.message.edit("Okay,\n"
-                              "Send me your custom caption.\n\n"
-                              "Press /cancel to cancel process.")
+        await cb.message.edit("Send me your custom caption\n\n"
+                              "Press /cancel to cancel process")
         user_input_msg: "types.Message" = await c.listen(cb.message.chat.id)
         if not user_input_msg.text:
             await cb.message.edit("Process Cancelled!")
@@ -86,11 +85,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
             await cb.message.edit("Process Cancelled!")
             return await user_input_msg.continue_propagation()
         await db.set_caption(cb.from_user.id, user_input_msg.text.markdown)
-        await cb.message.edit("Custom Caption Added Successfully!",
-                              reply_markup=types.InlineKeyboardMarkup(
-                                  [[types.InlineKeyboardButton("Show Settings",
-                                                               callback_data="showSettings")]]
-                              ))
+        await cb.message.edit("Custom Caption Saved Successfully!")
     elif cb.data == "triggerApplyCaption":
         await cb.answer()
         apply_caption = await db.get_apply_caption(cb.from_user.id)
@@ -101,12 +96,12 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
         await show_settings(cb.message)
     elif cb.data == "triggerApplyDefaultCaption":
         await db.set_caption(cb.from_user.id, None)
-        await cb.answer("Okay, now I will keep default caption.", show_alert=True)
+        await cb.answer("Custom Caption cleared!", show_alert=True)
         await show_settings(cb.message)
     elif cb.data == "showCaption":
         caption = await db.get_caption(cb.from_user.id)
         if not caption:
-            await cb.answer("You didn't set any custom caption!", show_alert=True)
+            await cb.answer("No caption found!", show_alert=True)
         else:
             await cb.answer()
             await cb.message.edit(
