@@ -31,11 +31,11 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
                                ]]))
             
     elif cb.data == "rename":
-    editable = await data.message.edit("Now send me new file name!")
-    user_input_msg: Message = await client.listen(data.chat.id)
-    if user_input_msg.text is None:
-        await editable.edit("Process Cancelled!")
-        return await user_input_msg.continue_propagation()
+        editable = await data.message.edit("Now send me new file name!")
+        user_input_msg: Message = await client.listen(data.chat.id)
+        if user_input_msg.text is None:
+          await editable.edit("Process Cancelled!")
+          return await user_input_msg.continue_propagation()
     if user_input_msg.text and user_input_msg.text.startswith("/"):
         await editable.edit("Process Cancelled!")
         return await user_input_msg.continue_propagation()
