@@ -31,7 +31,7 @@ async def renamestart(c: Client, m: Message):
     await m.reply_text(
         text="**Should I show File Information?**",
         reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("Yes", callback_data="showFileInfo"),
+            [[InlineKeyboardButton("Yes", callback_data="rename"),
               InlineKeyboardButton("No", callback_data="closeMessage")]]
         ),
         disable_web_page_preview=True,
@@ -40,26 +40,24 @@ async def renamestart(c: Client, m: Message):
 
 
 
-@Client.on_message(filters.command(["rename", "r"]) & filters.private & ~filters.edited)
-async def rename_handler(c: Client, m: Message):
+@Client.on_callback_query(filters.regex(r"^rename"))
+async def rename_handler(client, data: CallbackQuery):
     # Checks
     if not m.from_user:
-        return await m.reply_text("I don't know about you sar :(")
-    if m.from_user.id not in Config.PRO_USERS:
+        return await data.message.reply_text("I don't know about you sar :(")
+    if data.from_user.id not in Config.PRO_USERS:
         is_in_gap, sleep_time = await check_time_gap(m.from_user.id)
         if is_in_gap:
-            await m.reply_text("Sorry Sir,\n"
+            await data.message.edit("Sorry Sir,\n"
                                "No Flooding Allowed!\n\n"
-                               f"Send After `{str(sleep_time)}s` !!",
-                               quote=True)
+                               f"Send After `{str(sleep_time)}s` !!")
             return
     await add_user_to_database(c, m)
-    if (not m.reply_to_message) or (not m.reply_to_message.media) or (not get_file_attr(m.reply_to_message)):
-        return await m.reply_text("Reply to any document/video/audio to rename it!", quote=True)
+
 
     # Proceed
-    editable = await m.reply_text("Now send me new file name!", quote=True)
-    user_input_msg: Message = await c.listen(m.chat.id)
+    editable = await data.message.edit("Now send me new file name!")
+    user_input_msg: Message = await client.listen(data.chat.id)
     if user_input_msg.text is None:
         await editable.edit("Process Cancelled!")
         return await user_input_msg.continue_propagation()
