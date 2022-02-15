@@ -35,7 +35,7 @@ async def show_settings(m: "types.Message"):
 
     try:
         await m.edit(
-            text="**Here you can setup your settings:**",
+            text="**Customize Settings:**",
             reply_markup=types.InlineKeyboardMarkup(buttons_markup),
             disable_web_page_preview=True,
             parse_mode="Markdown"
