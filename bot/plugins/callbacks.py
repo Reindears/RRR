@@ -180,7 +180,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
             progress=progress_for_pyrogram,
             progress_args=(
                 "Uploading to Telegram\n"
-                f"Data Centre : {_c_file_id.dc_id}\n",
+                f"Data Centre : {_c_file_id.dc_id}",
                 editable,
                 c_time
             )
