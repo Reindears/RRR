@@ -14,6 +14,8 @@ from bot.core.file_info import (
     get_file_type,
     get_file_attr
 )
+from pyrogram.types import ForceReply
+
 from configs import Config
 from bot.core.display import progress_for_pyrogram
 from bot.core.db.database import db
@@ -142,7 +144,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
         await cb.message.delete(True)
         
     elif cb.data == "rename":
-        editable = await cb.message.edit("Now send me new file name!")
+        editable = await cb.message.edit("Now send me new file name!", reply_markup = ForceReply())
         user_input_msg: Message = await c.listen(cb.message.chat.id)
         if user_input_msg.text is None:
           await editable.edit("Process Cancelled!")
