@@ -170,7 +170,7 @@ async def handle_big_rename(
         if cb.message.reply_to_message.reply_markup \
         else None
     _db_caption = await db.get_caption(cb.from_user.id)
-    apply_caption = await db.get_apply_caption(m.from_user.id)
+    apply_caption = await db.get_apply_caption(cb.from_user.id)
     if (not _db_caption) and (apply_caption is True):
         caption = cb.message.reply_to_message.caption.markdown \
             if cb.message.reply_to_message.caption \
