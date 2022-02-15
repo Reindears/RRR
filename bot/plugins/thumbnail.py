@@ -24,10 +24,10 @@ async def show_thumbnail(c: Client, m: "types.Message"):
 
 @Client.on_message(filters.photo & filters.incoming & filters.private)
 async def set_thumbnail(client, message):
-    if not m.from_user:
-        return await m.reply_text("I don't know about you sar :(")
+    if not message.from_user:
+        return await message.reply_text("I don't know about you sar :(")
     await add_user_to_database(c, m)
-    await db.set_thumbnail(m.from_user.id, message.photo.file_id)
+    await db.set_thumbnail(message.from_user.id, message.photo.file_id)
     await message.reply_text("Okay,\n"
                        "I will use this image as custom thumbnail.",
                        reply_markup=types.InlineKeyboardMarkup(
