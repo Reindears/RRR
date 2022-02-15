@@ -41,8 +41,8 @@ async def renamestart(c: Client, m: Message):
         text=text,
         reply_markup=InlineKeyboardMarkup(
             [[InlineKeyboardButton("Rename", callback_data="rename"),
-              InlineKeyboardButton("Info", callback_data="showFileInfo")],
-             [ InlineKeyboardButton("Close", callback_data="closeMessage")]]
+              InlineKeyboardButton("Cancel", callback_data="closeMessage")]
+            ]
         ),
         disable_web_page_preview=True,
         reply_to_message_id=m.message_id
