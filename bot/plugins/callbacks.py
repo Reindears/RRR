@@ -167,7 +167,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
             _default_thumb_ = _m_attr.thumbs[0].file_id \
                 if (_m_attr and _m_attr.thumbs) \
                 else None
-        await handle_not_big(c, m, get_media_file_id(cb.message.reply_to_message), file_name,
+        await handle_not_big(c, cb, get_media_file_id(cb.message.reply_to_message), file_name,
                              editable, get_file_type(cb.message.reply_to_message), _default_thumb_)
         return
     file_type = get_file_type(cb.message.reply_to_message)
