@@ -33,7 +33,7 @@ async def handle_big_rename(
     editable: Message,
     file_type: str
 ):
-    await editable.edit("Sending to you ...")
+    await editable.edit("Processing")
     upload_as_doc = await db.get_upload_as_doc(cb.from_user.id)
 
     if (upload_as_doc is False) and (file_type == "video"):
@@ -63,7 +63,7 @@ async def handle_big_rename(
                   if _f_thumb
                   else None)
         if thumbnail_file_id:
-            await editable.edit("Fetching Thumbnail ...")
+            await editable.edit("Checking Thumbnail")
             thumb_path = await c.download_media(thumbnail_file_id,
                                                 f"{Config.DOWNLOAD_DIR}/{cb.from_user.id}/{cb.message.message_id}/")
             if _db_thumb:
@@ -99,7 +99,7 @@ async def handle_big_rename(
                   if _f_thumb
                   else None)
         if thumbnail_file_id:
-            await editable.edit("Fetching Thumbnail ...")
+            await editable.edit("Checking Thumbnail")
             thumb_path = await c.download_media(thumbnail_file_id,
                                                 f"{Config.DOWNLOAD_DIR}/{cb.from_user.id}/{cb.message.message_id}/")
             if _db_thumb:
@@ -144,7 +144,7 @@ async def handle_big_rename(
                   if _f_thumb
                   else None)
         if thumbnail_file_id:
-            await editable.edit("Fetching Thumbnail ...")
+            await editable.edit("Checking Thumbnail")
             thumb_path = await c.download_media(thumbnail_file_id,
                                                 f"{Config.DOWNLOAD_DIR}/{cb.from_user.id}/{cb.message.message_id}/")
             if _db_thumb:
@@ -174,7 +174,7 @@ async def handle_big_rename(
     if (not _db_caption) and (apply_caption is True):
         caption = cb.message.reply_to_message.caption.markdown \
             if cb.message.reply_to_message.caption \
-            else "**Developer: @AbirHasan2005**"
+            else "**Renamed By [Rename X Bot](https://t.me/filerenamexrobot)**"
     elif _db_caption and (apply_caption is True):
         caption = _db_caption
     else:
