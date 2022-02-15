@@ -42,7 +42,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
     elif cb.data == "showThumbnail":
         thumbnail = await db.get_thumbnail(cb.from_user.id)
         if not thumbnail:
-            await cb.answer("You didn't set any custom thumbnail!", force_reply=True)
+            await cb.answer("You didn't set any custom thumbnail!", show_alert=True)
         else:
             await cb.answer()
             await c.send_photo(cb.message.chat.id, thumbnail, "Custom Thumbnail",
@@ -127,11 +127,10 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
     elif cb.data == "showFileInfo":
         replied_m = cb.message.reply_to_message
         _file_name = get_media_file_name(replied_m)
-        text = f"**File Name:** `{_file_name}`\n\n" \
-               f"**File Extension:** `{_file_name.rsplit('.', 1)[-1].upper()}`\n\n" \
-               f"**File Type:** `{get_file_type(replied_m).upper()}`\n\n" \
-               f"**File Size:** `{humanbytes(get_media_file_size(replied_m))}`\n\n" \
-               f"**File MimeType:** `{get_file_attr(replied_m).mime_type}`"
+        text = f"**File Name :** `{_file_name}`\n\n" \
+               f"**Extension :** `{_file_name.rsplit('.', 1)[-1].upper()}`\n\n" \
+               f"**Size :** `{humanbytes(get_media_file_size(replied_m))}`\n\n" \
+               f"**Mime Type :** `{get_file_attr(replied_m).mime_type}`"
         await cb.message.edit(
             text=text,
             parse_mode="Markdown",
@@ -144,7 +143,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
         await cb.message.delete(True)
         
     elif cb.data == "rename":
-        editable = await cb.message.edit("Now send me new file name!", reply_markup = ForceReply())
+        editable = await cb.message.edit("Now send me new file name!")
         user_input_msg: Message = await c.listen(cb.message.chat.id)
         if user_input_msg.text is None:
           await editable.edit("Process Cancelled!")
