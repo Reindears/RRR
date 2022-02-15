@@ -189,7 +189,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
         if not file_id:
             return await editable.edit("Failed to Rename!\n\n"
                                        "Maybe your file corrupted :(")
-        await handle_big_rename(c, m, file_id, file_name, editable, file_type)
+        await handle_big_rename(c, cb, file_id, file_name, editable, file_type)
     except Exception as err:
         await editable.edit("Failed to Rename File!\n\n"
                             f"**Error:** `{err}`\n\n"
