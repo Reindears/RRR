@@ -147,7 +147,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
         
     elif cb.data == "rename":
         editable = await c.send_message(cb.message.chat.id, text="Now send me new file name", reply_to_message_id=cb.message.reply_to_message.message_id, reply_markup = ForceReply())
-        user_input_msg: Message = await c.listen(cb.message.reply_to_message.chat.id)
+        user_input_msg: Message = await c.listen(cb.message.chat.id)
         if user_input_msg.text is None:
           await editable.edit("Process Cancelled!")
           return await user_input_msg.continue_propagation()
