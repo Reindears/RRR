@@ -34,7 +34,7 @@ async def handle_big_rename(
     file_type: str
 ):
     await editable.edit("Sending to you ...")
-    upload_as_doc = await db.get_upload_as_doc(m.from_user.id)
+    upload_as_doc = await db.get_upload_as_doc(cb.from_user.id)
 
     if (upload_as_doc is False) and (file_type == "video"):
         ttl_seconds = None
