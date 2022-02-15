@@ -140,24 +140,24 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
     else:
         file_name = user_input_msg.text[:255]
     await editable.edit("Please Wait ...")
-    is_big = get_media_file_size(cb.reply_to_message) > (10 * 1024 * 1024)
+    is_big = get_media_file_size(cb.message.reply_to_message) > (10 * 1024 * 1024)
     if not is_big:
-        _default_thumb_ = await db.get_thumbnail(m.from_user.id)
+        _default_thumb_ = await db.get_thumbnail(cb.from_user.id)
         if not _default_thumb_:
-            _m_attr = get_file_attr(cb.reply_to_message)
+            _m_attr = get_file_attr(cb.message.reply_to_message)
             _default_thumb_ = _m_attr.thumbs[0].file_id \
                 if (_m_attr and _m_attr.thumbs) \
                 else None
-        await handle_not_big(c, m, get_media_file_id(m.reply_to_message), file_name,
-                             editable, get_file_type(m.reply_to_message), _default_thumb_)
+        await handle_not_big(c, m, get_media_file_id(cb.message.reply_to_message), file_name,
+                             editable, get_file_type(cb.message.reply_to_message), _default_thumb_)
         return
-    file_type = get_file_type(m.reply_to_message)
-    _c_file_id = FileId.decode(get_media_file_id(m.reply_to_message))
+    file_type = get_file_type(cb.message.reply_to_message)
+    _c_file_id = FileId.decode(get_media_file_id(cb.message.reply_to_message))
     try:
         c_time = time.time()
         file_id = await c.custom_upload(
             file_id=_c_file_id,
-            file_size=get_media_file_size(m.reply_to_message),
+            file_size=get_media_file_size(cb.message.reply_to_message),
             file_name=file_name,
             progress=progress_for_pyrogram,
             progress_args=(
