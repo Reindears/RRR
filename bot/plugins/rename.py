@@ -24,6 +24,18 @@ from bot.core.handlers.not_big import handle_not_big
 from bot.core.handlers.time_gap import check_time_gap
 from bot.core.handlers.big_rename import handle_big_rename
 
+@Client.on_message((filters.video | filters.audio | filters.document) & ~filters.channel & ~filters.edited)
+async def renamestart(c: Client, m: Message):
+    await m.reply_text(
+        text="**Should I show File Information?**",
+        reply_markup=types.InlineKeyboardMarkup(
+            [[types.InlineKeyboardButton("Yes", callback_data="showFileInfo"),
+              types.InlineKeyboardButton("No", callback_data="closeMessage")]]
+        ),
+        disable_web_page_preview=True,
+        reply_to_message_id=m.message_id
+
+
 
 @Client.on_message(filters.command(["rename", "r"]) & filters.private & ~filters.edited)
 async def rename_handler(c: Client, m: Message):
