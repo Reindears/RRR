@@ -28,14 +28,15 @@ from bot.core.handlers.time_gap import check_time_gap
 from bot.core.handlers.big_rename import handle_big_rename
 
 @Client.on_message((filters.video | filters.audio | filters.document) & ~filters.channel & ~filters.edited)
-async def renamestart(c: Client, m: Message):
-  replied_m = m.message
-  file_name = get_media_file_name(replied_m)
-  text = f"**File Name:** `{_file_name}`\n\n" \
+async def renamestart(c: Client, m: Message): 
+    replied_m = m.message
+    file_name = get_media_file_name(replied_m)
+    text = f"**File Name:** `{_file_name}`\n\n" \
                f"**File Extension:** `{_file_name.rsplit('.', 1)[-1].upper()}`\n\n" \
                f"**File Type:** `{get_file_type(replied_m).upper()}`\n\n" \
                f"**File Size:** `{humanbytes(get_media_file_size(replied_m))}`\n\n" \
                f"**File MimeType:** `{get_file_attr(replied_m).mime_type}`"
+
     await m.reply_text(
         text=text,
         reply_markup=InlineKeyboardMarkup(
