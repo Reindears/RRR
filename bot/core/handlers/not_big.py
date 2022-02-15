@@ -24,7 +24,7 @@ async def handle_not_big(
     if (not _db_caption) and (apply_caption is True):
         caption = cb.message.reply_to_message.caption.markdown \
             if cb.message.reply_to_message.caption \
-            else "**[Rename X Bot](https://t.me/filerenamexrobot)**"
+            else "**Renamed by [Rename X Bot](https://t.me/filerenamexrobot)**"
     elif _db_caption and (apply_caption is True):
         caption = _db_caption
     else:
