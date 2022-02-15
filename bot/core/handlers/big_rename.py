@@ -56,7 +56,7 @@ async def handle_big_rename(
         _f_thumb = cb.message.reply_to_message.video.thumbs[0] \
             if cb.message.reply_to_message.video.thumbs \
             else None
-        _db_thumb = await db.get_thumbnail(m.from_user.id)
+        _db_thumb = await db.get_thumbnail(cb.from_user.id)
         thumbnail_file_id = _db_thumb \
             if _db_thumb \
             else (_f_thumb.file_id
