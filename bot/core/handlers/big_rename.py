@@ -38,7 +38,7 @@ async def handle_big_rename(
 
     if (upload_as_doc is False) and (file_type == "video"):
         ttl_seconds = None
-        supports_streaming = m.reply_to_message.video.supports_streaming \
+        supports_streaming = cb.message.reply_to_message.video.supports_streaming \
             if cb.message.reply_to_message.video.supports_streaming \
             else None
         duration = cb.message.reply_to_message.video.duration \
