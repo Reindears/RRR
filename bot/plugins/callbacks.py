@@ -50,7 +50,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
                                    types.InlineKeyboardButton("🔄 Update",
                                                               callback_data="setThumbnail")
                                ],
-                                   types.InlineKeyboardButton("🗑 Delete",
+                                 [  types.InlineKeyboardButton("🗑 Delete",
                                                               callback_data="deleteThumbnail")
                                ]
                                ]))
@@ -115,7 +115,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
                                    types.InlineKeyboardButton("🔄 Update",
                                                               callback_data="setCustomCaption")
                                ],
-                                   types.InlineKeyboardButton("🗑 Delete",
+                                [   types.InlineKeyboardButton("🗑 Delete",
                                                               callback_data="triggerApplyDefaultCaption")
                                ]
                                ]))
