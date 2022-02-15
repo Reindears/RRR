@@ -47,9 +47,13 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
             await cb.answer()
             await c.send_photo(cb.message.chat.id, thumbnail,
                                reply_markup=types.InlineKeyboardMarkup([[
-                                   types.InlineKeyboardButton("🗑 Delete Thumbnail",
+                                   types.InlineKeyboardButton("🔄 Update",
+                                                              callback_data="setThumbnail")
+                               ],
+                                   types.InlineKeyboardButton("🗑 Delete",
                                                               callback_data="deleteThumbnail")
-                               ]]))
+                               ]
+                               ]))
             
 
 
@@ -107,10 +111,14 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
             await cb.message.edit(
                 text=caption,
                 parse_mode="Markdown",
-                reply_markup=types.InlineKeyboardMarkup([[
-                    types.InlineKeyboardButton("Go Back", callback_data="showSettings")
-                ]])
-            )
+                               reply_markup=types.InlineKeyboardMarkup([[
+                                   types.InlineKeyboardButton("🔄 Update",
+                                                              callback_data="setCustomCaption")
+                               ],
+                                   types.InlineKeyboardButton("🗑 Delete",
+                                                              callback_data="triggerApplyDefaultCaption")
+                               ]
+                               ]))
     elif cb.data == "triggerUploadMode":
         await cb.answer()
         upload_as_doc = await db.get_upload_as_doc(cb.from_user.id)
