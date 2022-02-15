@@ -18,6 +18,22 @@ def get_media_file_name(message: Message):
         return media.file_name
     else:
         return None
+    
+def get_media_caption(message: Message):
+    """
+    Pass Message object of audio or document or sticker or video or animation to get caption of file.
+    """
+
+    media = message.audio or \
+            message.document or \
+            message.sticker or \
+            message.video or \
+            message.animation
+
+    if media and media.caption:
+        return media.caption
+    else:
+        return None
 
 
 def get_media_file_size(message: Message):
