@@ -73,7 +73,7 @@ class NormalRename(Scaffold):
             try:
                 c_time = time.time()
                 file = await self.save_file(dl_file_path, progress=progress_for_pyrogram, progress_args=(
-                    "Uploading ...",
+                    "Uploading to Telegram",
                     editable,
                     c_time
                 ))
