@@ -71,7 +71,7 @@ async def handle_not_big(
         file_id,
         file_name,
         editable,
-        cb.chat.id,
+        cb.message.chat.id,
         upload_mode,
         _thumb,
         caption,
