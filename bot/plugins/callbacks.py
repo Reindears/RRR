@@ -29,6 +29,62 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
                                    types.InlineKeyboardButton("Delete Thumbnail",
                                                               callback_data="deleteThumbnail")
                                ]]))
+            
+    elif cb.data == "rename":
+    editable = await data.message.edit("Now send me new file name!")
+    user_input_msg: Message = await client.listen(data.chat.id)
+    if user_input_msg.text is None:
+        await editable.edit("Process Cancelled!")
+        return await user_input_msg.continue_propagation()
+    if user_input_msg.text and user_input_msg.text.startswith("/"):
+        await editable.edit("Process Cancelled!")
+        return await user_input_msg.continue_propagation()
+    _raw_file_name = get_media_file_name(m.reply_to_message)
+    if not _raw_file_name:
+        _file_ext = mimetypes.guess_extension(get_file_attr(m.reply_to_message).mime_type)
+        _raw_file_name = "UnknownFileName" + _file_ext
+    if user_input_msg.text.rsplit(".", 1)[-1].lower() != _raw_file_name.rsplit(".", 1)[-1].lower():
+        file_name = user_input_msg.text.rsplit(".", 1)[0][:255] + "." + _raw_file_name.rsplit(".", 1)[-1].lower()
+    else:
+        file_name = user_input_msg.text[:255]
+    await editable.edit("Please Wait ...")
+    is_big = get_media_file_size(m.reply_to_message) > (10 * 1024 * 1024)
+    if not is_big:
+        _default_thumb_ = await db.get_thumbnail(m.from_user.id)
+        if not _default_thumb_:
+            _m_attr = get_file_attr(m.reply_to_message)
+            _default_thumb_ = _m_attr.thumbs[0].file_id \
+                if (_m_attr and _m_attr.thumbs) \
+                else None
+        await handle_not_big(c, m, get_media_file_id(m.reply_to_message), file_name,
+                             editable, get_file_type(m.reply_to_message), _default_thumb_)
+        return
+    file_type = get_file_type(m.reply_to_message)
+    _c_file_id = FileId.decode(get_media_file_id(m.reply_to_message))
+    try:
+        c_time = time.time()
+        file_id = await c.custom_upload(
+            file_id=_c_file_id,
+            file_size=get_media_file_size(m.reply_to_message),
+            file_name=file_name,
+            progress=progress_for_pyrogram,
+            progress_args=(
+                "Uploading ...\n"
+                f"DC: {_c_file_id.dc_id}",
+                editable,
+                c_time
+            )
+        )
+        if not file_id:
+            return await editable.edit("Failed to Rename!\n\n"
+                                       "Maybe your file corrupted :(")
+        await handle_big_rename(c, m, file_id, file_name, editable, file_type)
+    except Exception as err:
+        await editable.edit("Failed to Rename File!\n\n"
+                            f"**Error:** `{err}`\n\n"
+                            f"**Traceback:** `{traceback.format_exc()}`")
+
+
     elif cb.data == "deleteThumbnail":
         await db.set_thumbnail(cb.from_user.id, None)
         await cb.answer("Okay, I deleted your custom thumbnail. Now I will apply default thumbnail.", show_alert=True)
