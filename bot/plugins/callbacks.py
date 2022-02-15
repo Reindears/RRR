@@ -147,7 +147,6 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
         if user_input_msg.text is None:
           await editable.edit("Process Cancelled!")
           return await user_input_msg.continue_propagation()
-        return await user_input_msg.continue_propagation()
     _raw_file_name = get_media_file_name(cb.message.reply_to_message)
     if not _raw_file_name:
         _file_ext = mimetypes.guess_extension(get_file_attr(cb.message.reply_to_message).mime_type)
