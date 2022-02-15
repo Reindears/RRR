@@ -42,7 +42,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
     elif cb.data == "showThumbnail":
         thumbnail = await db.get_thumbnail(cb.from_user.id)
         if not thumbnail:
-            await cb.answer("You didn't set any custom thumbnail!", show_alert=True)
+            await cb.answer("You didn't set any custom thumbnail!", force_reply=True)
         else:
             await cb.answer()
             await c.send_photo(cb.message.chat.id, thumbnail, "Custom Thumbnail",
