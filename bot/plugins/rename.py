@@ -28,7 +28,7 @@ from bot.core.handlers.big_rename import handle_big_rename
 async def renamestart(c: Client, m: Message):
     await m.reply_text(
         text="**Should I show File Information?**",
-        reply_markup=types.InlineKeyboardMarkup(
+        reply_markup=InlineKeyboardMarkup(
             [[InlineKeyboardButton("Yes", callback_data="showFileInfo"),
               InlineKeyboardButton("No", callback_data="closeMessage")]]
         ),
