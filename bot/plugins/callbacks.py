@@ -123,7 +123,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
         await cb.message.delete(True)
         
     elif cb.data == "rename":
-        editable = await data.message.edit("Now send me new file name!")
+        editable = await cb.message.edit("Now send me new file name!")
         user_input_msg: Message = await client.listen(data.chat.id)
         if user_input_msg.text is None:
           await editable.edit("Process Cancelled!")
