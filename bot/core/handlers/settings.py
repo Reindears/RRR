@@ -17,11 +17,11 @@ async def show_settings(m: "types.Message"):
     apply_caption = user_data.get("apply_caption", True)
     thumbnail = user_data.get("thumbnail", None)
     buttons_markup = [
-        [types.InlineKeyboardButton(f"🗂 Upload as {'Document' if upload_as_doc else 'Video'}",
+        [types.InlineKeyboardButton(f"🗂 Upload - {'Document' if upload_as_doc else 'Video'}",
                                     callback_data="triggerUploadMode")],
         [types.InlineKeyboardButton("🖼 Set Thumbnail",
                                     callback_data="setThumbnail")],
-        [types.InlineKeyboardButton("➕ Custom Caption",
+        [types.InlineKeyboardButton("➕ Add  Caption",
                                     callback_data="setCustomCaption")]
     ]
     if thumbnail:
