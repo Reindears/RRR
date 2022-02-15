@@ -22,7 +22,7 @@ async def show_thumbnail(c: Client, m: "types.Message"):
                        ))
 
 
-@Client.on_message((filters.photo) & ~filters.private & ~filters.edited)
+@Client.on_message(filters.command("delete_thumbnail") & filters.private & ~filters.edited)
 async def set_thumbnail(c: Client, m: "types.Message"):
     if not m.from_user:
         return await m.reply_text("I don't know about you sar :(")
