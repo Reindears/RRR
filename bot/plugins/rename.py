@@ -34,6 +34,7 @@ async def renamestart(c: Client, m: Message):
         ),
         disable_web_page_preview=True,
         reply_to_message_id=m.message_id
+    )
 
 
 
