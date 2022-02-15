@@ -7,6 +7,8 @@ from pyrogram import (
     raw,
     utils
 )
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
+
 from pyrogram.types import (
     Message
 )
@@ -22,7 +24,7 @@ from bot.core.file_info import (
 
 async def handle_big_rename(
     c: Client,
-    m: Message,
+    cb: CallbackQuery,
     file_id: Union[
         "raw.types.InputFileBig",
         "raw.types.InputFile"
@@ -37,22 +39,22 @@ async def handle_big_rename(
     if (upload_as_doc is False) and (file_type == "video"):
         ttl_seconds = None
         supports_streaming = m.reply_to_message.video.supports_streaming \
-            if m.reply_to_message.video.supports_streaming \
+            if cb.message.reply_to_message.video.supports_streaming \
             else None
-        duration = m.reply_to_message.video.duration \
-            if m.reply_to_message.video.duration \
+        duration = cb.message.reply_to_message.video.duration \
+            if cb.message.reply_to_message.video.duration \
             else 0
-        width = m.reply_to_message.video.width \
-            if m.reply_to_message.video.width \
+        width = cb.message.reply_to_message.video.width \
+            if cb.message.reply_to_message.video.width \
             else 0
-        height = m.reply_to_message.video.height \
-            if m.reply_to_message.video.height \
+        height = cb.message.reply_to_message.video.height \
+            if cb.message.reply_to_message.video.height \
             else 0
-        mime_type = m.reply_to_message.video.mime_type \
-            if m.reply_to_message.video.mime_type \
+        mime_type = cb.message.reply_to_message.video.mime_type \
+            if cb.message.reply_to_message.video.mime_type \
             else "video/mp4"
-        _f_thumb = m.reply_to_message.video.thumbs[0] \
-            if m.reply_to_message.video.thumbs \
+        _f_thumb = cb.message.reply_to_message.video.thumbs[0] \
+            if cb.message.reply_to_message.video.thumbs \
             else None
         _db_thumb = await db.get_thumbnail(m.from_user.id)
         thumbnail_file_id = _db_thumb \
@@ -63,7 +65,7 @@ async def handle_big_rename(
         if thumbnail_file_id:
             await editable.edit("Fetching Thumbnail ...")
             thumb_path = await c.download_media(thumbnail_file_id,
-                                                f"{Config.DOWNLOAD_DIR}/{m.from_user.id}/{m.message_id}/")
+                                                f"{Config.DOWNLOAD_DIR}/{cb.from_user.id}/{cb.message.message_id}/")
             if _db_thumb:
                 thumb_path = await fix_thumbnail(thumb_path)
             thumb = await c.save_file(path=thumb_path)
@@ -87,8 +89,8 @@ async def handle_big_rename(
         )
 
     elif (upload_as_doc is False) and (file_type == "audio"):
-        _f_thumb = m.reply_to_message.audio.thumbs[0] \
-            if m.reply_to_message.audio.thumbs \
+        _f_thumb = cb.message.reply_to_message.audio.thumbs[0] \
+            if cb.message.reply_to_message.audio.thumbs \
             else None
         _db_thumb = await db.get_thumbnail(m.from_user.id)
         thumbnail_file_id = _db_thumb \
@@ -99,23 +101,23 @@ async def handle_big_rename(
         if thumbnail_file_id:
             await editable.edit("Fetching Thumbnail ...")
             thumb_path = await c.download_media(thumbnail_file_id,
-                                                f"{Config.DOWNLOAD_DIR}/{m.from_user.id}/{m.message_id}/")
+                                                f"{Config.DOWNLOAD_DIR}/{cb.from_user.id}/{cb.message.message_id}/")
             if _db_thumb:
                 thumb_path = await fix_thumbnail(thumb_path)
             thumb = await c.save_file(path=thumb_path)
         else:
             thumb = None
-        mime_type = m.reply_to_message.audio.mime_type \
-            if m.reply_to_message.audio.mime_type \
+        mime_type = cb.message.reply_to_message.audio.mime_type \
+            if cb.message.reply_to_message.audio.mime_type \
             else "audio/mpeg"
-        duration = m.reply_to_message.audio.duration \
-            if m.reply_to_message.audio.duration \
+        duration = cb.message.reply_to_message.audio.duration \
+            if cb.message.reply_to_message.audio.duration \
             else None
-        performer = m.reply_to_message.audio.performer \
-            if m.reply_to_message.audio.performer \
+        performer = cb.message.reply_to_message.audio.performer \
+            if cb.message.reply_to_message.audio.performer \
             else None
-        title = m.reply_to_message.audio.title \
-            if m.reply_to_message.audio.title \
+        title = cb.message.reply_to_message.audio.title \
+            if cb.message.reply_to_message.audio.title \
             else None
 
         media = raw.types.InputMediaUploadedDocument(
@@ -134,8 +136,8 @@ async def handle_big_rename(
         )
 
     elif (upload_as_doc is True) or (file_type == "document"):
-        _f_thumb = get_thumb_file_id(m.reply_to_message)
-        _db_thumb = await db.get_thumbnail(m.from_user.id)
+        _f_thumb = get_thumb_file_id(cb.message.reply_to_message)
+        _db_thumb = await db.get_thumbnail(cb.from_user.id)
         thumbnail_file_id = _db_thumb \
             if _db_thumb \
             else (_f_thumb
@@ -144,13 +146,13 @@ async def handle_big_rename(
         if thumbnail_file_id:
             await editable.edit("Fetching Thumbnail ...")
             thumb_path = await c.download_media(thumbnail_file_id,
-                                                f"{Config.DOWNLOAD_DIR}/{m.from_user.id}/{m.message_id}/")
+                                                f"{Config.DOWNLOAD_DIR}/{cb.from_user.id}/{cb.message.message_id}/")
             if _db_thumb:
                 thumb_path = await fix_thumbnail(thumb_path)
             thumb = await c.save_file(path=thumb_path)
         else:
             thumb = None
-        mime_type = get_media_mime_type(m.reply_to_message) or "application/zip"
+        mime_type = get_media_mime_type(cb.message.reply_to_message) or "application/zip"
 
         media = raw.types.InputMediaUploadedDocument(
             mime_type=mime_type,
@@ -164,14 +166,14 @@ async def handle_big_rename(
     else:
         return await editable.edit("I can't rename it!")
 
-    reply_markup = m.reply_to_message.reply_markup \
-        if m.reply_to_message.reply_markup \
+    reply_markup = cb.message.reply_to_message.reply_markup \
+        if cb.message.reply_to_message.reply_markup \
         else None
-    _db_caption = await db.get_caption(m.from_user.id)
+    _db_caption = await db.get_caption(cb.from_user.id)
     apply_caption = await db.get_apply_caption(m.from_user.id)
     if (not _db_caption) and (apply_caption is True):
-        caption = m.reply_to_message.caption.markdown \
-            if m.reply_to_message.caption \
+        caption = cb.message.reply_to_message.caption.markdown \
+            if cb.message.reply_to_message.caption \
             else "**Developer: @AbirHasan2005**"
     elif _db_caption and (apply_caption is True):
         caption = _db_caption
@@ -182,7 +184,7 @@ async def handle_big_rename(
     try:
         r = await c.send(
             raw.functions.messages.SendMedia(
-                peer=await c.resolve_peer(m.chat.id),
+                peer=await c.resolve_peer(cb.message.chat.id),
                 media=media,
                 silent=None,
                 reply_to_msg_id=None,
@@ -192,7 +194,7 @@ async def handle_big_rename(
                 **await utils.parse_text_entities(c, caption, parse_mode, None)
             )
         )
-        await rm_dir(f"{Config.DOWNLOAD_DIR}/{m.from_user.id}/{m.message_id}/")
+        await rm_dir(f"{Config.DOWNLOAD_DIR}/{cb.from_user.id}/{cb.message.message_id}/")
     except Exception as _err:
         Config.LOGGER.getLogger(__name__).error(_err)
         Config.LOGGER.getLogger(__name__).info(f"{traceback.format_exc()}")
