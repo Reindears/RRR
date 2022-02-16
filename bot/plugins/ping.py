@@ -11,7 +11,10 @@ async def ping_handler(c: Client, m: "types.Message"):
     if not m.from_user:
         return await m.reply_text("I don't know about you sar :(")
     await add_user_to_database(c, m)
-    await m.reply_sticker("CAACAgIAAxkBAAEDoeVh2A-XwOItIFx4cvNQ_RbdtSkwTgACLgADTlzSKUAuvTVpmIdGIwQ")
+    await c.delete_messages(
+                    chat_id = m.chat.id,
+                    message_ids = m.message_id
+                )
     await c.send_flooded_message(
         chat_id=m.chat.id,
         
