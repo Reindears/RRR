@@ -147,7 +147,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
         
     elif cb.data == "rename":       
         if cb.from_user.id not in Config.PRO_USERS:
-            is_in_gap, sleep_time = await check_time_gap(cb.from_user.id)
+        is_in_gap, sleep_time = await check_time_gap(cb.from_user.id)
         if is_in_gap:
             await cb.message.edit("Sorry Sir,\n"
                                "No Flooding Allowed!\n\n"
