@@ -30,6 +30,17 @@ from bot.core.handlers.big_rename import handle_big_rename
 
 @Client.on_message((filters.video | filters.audio | filters.document) & ~filters.channel & ~filters.edited)
 async def renamestart(c: Client, m: Message): 
+    if not m.from_user:
+        return await m.reply_text("I don't know about you sar :(")
+    if m.from_user.id not in Config.PRO_USERS:
+        is_in_gap, sleep_time = await check_time_gap(m.from_user.id)
+        if is_in_gap:
+            await m.reply_text("Sorry Sir,\n"
+                               "No Flooding Allowed!\n\n"
+                               f"Send After `{str(sleep_time)}s` !!",
+                               quote=True)
+            return
+    await add_user_to_database(c, m)
     replied_m = m
     _file_name = get_media_file_name(replied_m)
     text = f"**File Name :** `{_file_name}`\n\n" \
