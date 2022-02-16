@@ -21,15 +21,15 @@ async def ping_handler(c: Client, m: "types.Message"):
         text="👋🏻 Hey, **{}**\n\nI'm a rename bot with multiple functions. Check help for usage\n\nI can rename media without downloading it! Speed depends on your media DC.\n\nMade With ❤️ By @Sybots".format(m.from_user.mention),
         reply_markup=types.InlineKeyboardMarkup([
             [
-           types.InlineKeyboardButton("🛠 Settings",
+           types.InlineKeyboardButton("Settings",
                                       callback_data="showSettings")
             ],[
-           types.InlineKeyboardButton("📜 Help",
+           types.InlineKeyboardButton("Help",
                                       callback_data="showSettings"),
-           types.InlineKeyboardButton("🎭 About",
+           types.InlineKeyboardButton("About",
                                       callback_data="showSettings")],
             [
-           types.InlineKeyboardButton("❌ Close",
+           types.InlineKeyboardButton("Close",
                                       callback_data="closeMessage")
                 
         ]])
