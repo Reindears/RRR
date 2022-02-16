@@ -25,7 +25,7 @@ async def show_settings(m: "types.Message"):
                                     callback_data="setCustomCaption")],
         [types.InlineKeyboardButton(f"Default Caption {'❌' if caption else '☑️'}",
                                     callback_data="triggerApplyDefaultCaption")],
-        [types.InlineKeyboardButton(f"Default Thumbanil {'❌' if caption else '☑️'}",
+        [types.InlineKeyboardButton(f"Default Thumbanil {'❌' if thumbnail else '☑️'}",
                                     callback_data="deleteThumbnail")]
     ]
     if thumbnail:
