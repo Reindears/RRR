@@ -33,8 +33,8 @@ async def renamestart(c: Client, m: Message):
     replied_m = m
     _file_name = get_media_file_name(replied_m)
     text = f"**File Name :** `{_file_name}`\n\n" \
-               f"**Extension :** `{_file_name.rsplit('.', 1)[-1].upper()}`\n\n" \
-               f"**Size :** `{humanbytes(get_media_file_size(replied_m))}`\n\n" \
+               f"**Extension Type :** `{_file_name.rsplit('.', 1)[-1].upper()}`\n\n" \
+               f"**File Size :** `{humanbytes(get_media_file_size(replied_m))}`\n\n" \
                f"**Mime Type :** `{get_file_attr(replied_m).mime_type}`"
 
     await m.reply_text(
