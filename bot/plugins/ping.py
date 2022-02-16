@@ -16,15 +16,15 @@ async def ping_handler(c: Client, m: "types.Message"):
         chat_id=m.chat.id,
         
         text="**👋🏻 Hey, {}\n\nThis is File Rename Bot with Multiple features Please use help to know usage 🖥\n\nMade with ❤️ By @Sybots**".format(m.from_user.mention),
-        reply_markup=types.InlineKeyboardMarkup([[
+        reply_markup=types.InlineKeyboardMarkup([
+            [
+           types.InlineKeyboardButton("Settings",
+                                      callback_data="showSettings")
+            ],[
            types.InlineKeyboardButton("Help",
                                       callback_data="showSettings"),
            types.InlineKeyboardButton("About",
                                       callback_data="showSettings")],
-            [
-           types.InlineKeyboardButton("Settings",
-                                      callback_data="showSettings")
-            ],
             [
            types.InlineKeyboardButton("Close",
                                       callback_data="closeMessage")
