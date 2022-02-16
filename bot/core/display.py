@@ -13,7 +13,7 @@ PROGRESS = """
 **Finished :** `{1}`
 **Total Size :** `{2}`
 **Speed :** `{3}/s`
-**Time Remaining :** `{4}`
+**Time :** `{4}`
 """
 
 
