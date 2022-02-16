@@ -145,7 +145,15 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
     elif cb.data == "closeMessage":
         await cb.message.delete(True)
         
-    elif cb.data == "rename":
+    elif cb.data == "rename":       
+        if cb.from_user.id not in Config.PRO_USERS:
+            is_in_gap, sleep_time = await check_time_gap(cb.from_user.id)
+        if is_in_gap:
+            await cb.message.edit("Sorry Sir,\n"
+                               "No Flooding Allowed!\n\n"
+                               f"Send After `{str(sleep_time)}s` !!",
+                               quote=True)
+            return
         editable = await cb.message.edit("Now send me new file name")
         user_input_msg: Message = await c.listen(cb.message.chat.id)
         if user_input_msg.text is None:
