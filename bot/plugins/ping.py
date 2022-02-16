@@ -24,6 +24,11 @@ async def ping_handler(c: Client, m: "types.Message"):
             [
            types.InlineKeyboardButton("Settings",
                                       callback_data="showSettings")
+            ],
+            [
+           types.InlineKeyboardButton("Close",
+                                      callback_data="closeMessage")
+                
         ]])
     )
 
