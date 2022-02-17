@@ -15,9 +15,8 @@ buttonz=ReplyKeyboardMarkup(
                 ["Help","About"],
                 ["Settings"]
                         
-            ],
-            resize_keyboard=True
-        )
+            ]
+)
 
 
 @Client.on_message(filters.command(["start", "ping"]) & filters.private & ~filters.edited)
