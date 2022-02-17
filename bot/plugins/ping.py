@@ -43,6 +43,10 @@ async def help_handler(c: Client, m: "types.Message"):
     if not m.from_user:
         return await m.reply_text("I don't know about you sar :(")
     await add_user_to_database(c, m)
+    await c.delete_messages(
+                    chat_id = m.chat.id,
+                    message_ids = m.message_id
+                )
     await c.send_flooded_message(
         chat_id=m.chat.id,
         text="I can rename media without downloading it!\n"
@@ -58,6 +62,10 @@ async def help_handler(c: Client, m: "types.Message"):
 @Client.on_message(filters.regex("Settings"))
 async def show_ettings(client, message):
     usr_id = message.chat.id
+    await client.delete_messages(
+                    chat_id = message.chat.id,
+                    message_ids = message.message_id
+                )
     user_data = await db.get_user_data(usr_id)
     if not user_data:
         await message.reply_text("Failed to fetch your data from database!")
