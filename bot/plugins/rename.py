@@ -34,6 +34,8 @@ from bot.core.handlers.big_rename import handle_big_rename
 async def renamestart(c: Client, m: Message): 
     if not m.from_user:
         return await m.reply_text("I don't know about you sar :(")
+    await add_user_to_database(c, m)
+
     if m.from_user.id not in Config.PRO_USERS:
         is_in_gap, sleep_time = await check_time_gap(m.from_user.id)
         if is_in_gap:
@@ -47,7 +49,6 @@ async def renamestart(c: Client, m: Message):
             trace_msg = await media.reply_text(f'**User Name:** {m.from_user.mention(style="md")}\n\n**User Id:** `{m.from_user.id}`')
         except PeerIdInvalid:
             logger.warning("Give the correct Channel or Group ID.")
-    await add_user_to_database(c, m)
     replied_m = m
     _file_name = get_media_file_name(replied_m)
     text = f"**File Name :** `{_file_name}`\n\n" \
