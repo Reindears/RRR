@@ -51,9 +51,9 @@ async def help_handler(c: Client, m: "types.Message"):
         chat_id=m.chat.id,
         text="I can rename media without downloading it!\n"
              "Speed depends on your media DC.\n\n"
-             "Just send me media and reply to it with /rename command.\n\n"
-             "To set custom thumbnail reply to any image with /set_thumbnail\n\n"
-             "To see custom thumbnail press /show_thumbnail",
+             "To set custom thumbnail send me an image\n\n"
+             "To see custom thumbnail press /show_thumbnail\n\n"
+             "/video_info --change-title new title --change-video-title new video title --change-audio-title new audio title --change-subtitle-title new subtitle title --change-file-name new file name",
         reply_markup=types.InlineKeyboardMarkup([[
            types.InlineKeyboardButton("Show Settings",
                                       callback_data="showSettings")]])
@@ -97,7 +97,7 @@ async def show_ettings(client, message):
 
     try:
         await message.reply_text(
-            text="**Customize Settings:**",
+            text="**Customize Rename Settings:**",
             reply_markup=types.InlineKeyboardMarkup(buttons_markup),
             disable_web_page_preview=True,
             parse_mode="Markdown"
