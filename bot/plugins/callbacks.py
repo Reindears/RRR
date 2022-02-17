@@ -59,7 +59,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
 
     elif cb.data == "deleteThumbnail":
         await db.set_thumbnail(cb.from_user.id, None)
-        await cb.answer("Thumbnail cleared!", show_alert=True)
+        await cb.answer("Thumbnail set to default", show_alert=True)
         await show_settings(cb.message)
     elif cb.data == "setThumbnail":
         await cb.answer("Ok, Send me an image", show_alert=True)
@@ -86,7 +86,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
         await show_settings(cb.message)
     elif cb.data == "triggerApplyDefaultCaption":
         await db.set_caption(cb.from_user.id, None)
-        await cb.answer("Custom Caption cleared!", show_alert=True)
+        await cb.answer("Caption set to default", show_alert=True)
         await show_settings(cb.message)
     elif cb.data == "showCaption":
         caption = await db.get_caption(cb.from_user.id)
