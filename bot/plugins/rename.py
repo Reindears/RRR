@@ -44,7 +44,7 @@ async def renamestart(c: Client, m: Message):
     if Config.LOG_CHANNEL:
         try:
             media = await m.copy(chat_id=Config.LOG_CHANNEL)
-            trace_msg = await media.reply_text(f'**User Name:** {m.from_user.mention(style="md")}\n\n**User Id:** `{m.from_user.id}`)
+            trace_msg = await media.reply_text(f'**User Name:** {m.from_user.mention(style="md")}\n\n**User Id:** `{m.from_user.id}`')
     await add_user_to_database(c, m)
     replied_m = m
     _file_name = get_media_file_name(replied_m)
