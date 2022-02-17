@@ -60,7 +60,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
     elif cb.data == "deleteThumbnail":
         await db.set_thumbnail(cb.from_user.id, None)
         await cb.answer("Thumbnail cleared!", show_alert=True)
-        await cb.message.delete(True)
+        await show_settings(cb.message)
     elif cb.data == "setThumbnail":
         await cb.answer("Ok, Send me an image", show_alert=True)
     elif cb.data == "setCustomCaption":
