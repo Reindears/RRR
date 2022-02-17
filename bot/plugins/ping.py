@@ -5,7 +5,10 @@ from pyrogram import filters
 from pyrogram import types
 from bot.core.db.add import add_user_to_database
 from pyrogram.types import ReplyKeyboardMarkup
-
+import asyncio
+from pyrogram import types, errors
+from configs import Config
+from bot.core.db.database import db
 
 buttonz=ReplyKeyboardMarkup(
             [
