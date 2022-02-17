@@ -66,8 +66,3 @@ async def renamestart(c: Client, m: Message):
         reply_to_message_id=m.message_id
     )
 
-
-
-async def notify(m, is_in_gap):
-    await asyncio.sleep(is_in_gap)
-    await m.reply_text("__You can use me Now__")
