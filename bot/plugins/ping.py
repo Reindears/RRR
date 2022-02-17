@@ -54,9 +54,6 @@ async def help_handler(c: Client, m: "types.Message"):
              "To set custom thumbnail send me an image\n\n"
              "To see custom thumbnail press /show_thumbnail\n\n"
              "/video_info --change-title new title --change-video-title new video title --change-audio-title new audio title --change-subtitle-title new subtitle title --change-file-name new file name",
-        reply_markup=types.InlineKeyboardMarkup([[
-           types.InlineKeyboardButton("Show Settings",
-                                      callback_data="showSettings")]])
     )
 
 @Client.on_message(filters.regex("Settings"))
