@@ -62,20 +62,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
         await cb.answer("Thumbnail cleared!", show_alert=True)
         await cb.message.delete(True)
     elif cb.data == "setThumbnail":
-        await cb.answer()
         await cb.answer("Ok, Send me an image", show_alert=True)
-        from_user_thumb: "types.Message" = await c.listen(cb.message.chat.id)
-        if not from_user_thumb.photo:
-            await cb.message.edit("Process Cancelled!")
-            return await from_user_thumb.continue_propagation()
-        else:
-            await db.set_thumbnail(cb.from_user.id, from_user_thumb.photo.file_id)
-            await cb.message.edit("Okay!\n"
-                                  "Now I will apply this thumbnail to next uploads.",
-                                  reply_markup=types.InlineKeyboardMarkup(
-                                      [[types.InlineKeyboardButton("Show Settings",
-                                                                   callback_data="showSettings")]]
-                                  ))
     elif cb.data == "setCustomCaption":
         await cb.answer()
         await cb.message.edit("Send me your custom caption\n\n"
