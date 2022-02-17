@@ -9,8 +9,8 @@ from pyrogram.types import ReplyKeyboardMarkup
 
 buttonz=ReplyKeyboardMarkup(
             [
-                ["start⚡️","help📚","login🔑","dc"],
-                ["follow❤️","ping📡","status📊","maintainers😎"]
+                ["Help","About"],
+                ["Settings"]
                         
             ],
             resize_keyboard=True
@@ -35,7 +35,7 @@ async def ping_handler(c: Client, m: "types.Message"):
     )
 
 
-@Client.on_message(filters.command("help") & filters.private & ~filters.edited)
+@Client.on_message(filters.regex("Help"))
 async def help_handler(c: Client, m: "types.Message"):
     if not m.from_user:
         return await m.reply_text("I don't know about you sar :(")
