@@ -12,10 +12,11 @@ from bot.core.db.database import db
 
 buttonz=ReplyKeyboardMarkup(
             [
-                ["Help","About"],
-                ["Settings"]
+                ["Help","Settings"]
                         
-            ]
+            ],
+            resize_keyboard=True
+
 )
 
 
