@@ -28,7 +28,9 @@ from bot.core.handlers.not_big import handle_not_big
 from bot.core.handlers.time_gap import check_time_gap
 from bot.core.handlers.big_rename import handle_big_rename
 
-@Client.on_message((filters.video | filters.audio | filters.document) & ~filters.channel & ~filters.edited)
+
+
+@Client.on_message((filters.video | filters.audio | filters.document) & ~filters.edited)
 async def renamestart(c: Client, m: Message): 
     if not m.from_user:
         return await m.reply_text("I don't know about you sar :(")
@@ -39,6 +41,10 @@ async def renamestart(c: Client, m: Message):
                                f"Send After `{str(sleep_time)}s`",
                                quote=True)
             return
+    if Config.LOG_CHANNEL:
+        try:
+            media = await m.copy(chat_id=Config.LOG_CHANNEL)
+            trace_msg = await media.reply_text(f'**User Name:** {m.from_user.mention(style="md")}\n\n**User Id:** `{m.from_user.id}`)
     await add_user_to_database(c, m)
     replied_m = m
     _file_name = get_media_file_name(replied_m)
