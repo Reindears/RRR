@@ -35,9 +35,8 @@ async def renamestart(c: Client, m: Message):
     if m.from_user.id not in Config.PRO_USERS:
         is_in_gap, sleep_time = await check_time_gap(m.from_user.id)
         if is_in_gap:
-            await m.reply_text("Sorry Sir,\n"
-                               "No Flooding Allowed!\n\n"
-                               f"Send After `{str(sleep_time)}s` !!",
+            await m.reply_text("🚧 Flood Wait\n\n"
+                               f"Send After `{str(sleep_time)}s`",
                                quote=True)
             return
     await add_user_to_database(c, m)
