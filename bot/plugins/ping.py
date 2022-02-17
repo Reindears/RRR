@@ -60,7 +60,7 @@ async def show_ettings(client, message):
                     chat_id = message.chat.id,
                     message_ids = message.message_id
                 )
-    await add_user_to_database(c, m)
+    await add_user_to_database(client, message)
     user_data = await db.get_user_data(usr_id)
     if not user_data:
         await message.reply_text("Failed to fetch your data from database!")
