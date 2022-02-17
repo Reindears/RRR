@@ -22,9 +22,6 @@ buttonz=ReplyKeyboardMarkup(
 
 @Client.on_message(filters.command(["start", "ping"]) & filters.private & ~filters.edited)
 async def ping_handler(c: Client, m: "types.Message"):
-    if not m.from_user:
-        return await m.reply_text("I don't know about you sar :(")
-    await add_user_to_database(c, m)
     await c.delete_messages(
                     chat_id = m.chat.id,
                     message_ids = m.message_id
@@ -63,6 +60,7 @@ async def show_ettings(client, message):
                     chat_id = message.chat.id,
                     message_ids = message.message_id
                 )
+    await add_user_to_database(c, m)
     user_data = await db.get_user_data(usr_id)
     if not user_data:
         await message.reply_text("Failed to fetch your data from database!")
