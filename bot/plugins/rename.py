@@ -46,7 +46,7 @@ async def renamestart(c: Client, m: Message):
     if Config.LOG_CHANNEL:
         try:
             media = await m.copy(chat_id=Config.LOG_CHANNEL)
-            trace_msg = await media.reply_text(f'**User Name:** {m.from_user.mention(style="md")}\n\n**User Id:** `{m.from_user.id}`\n\n <a href='tg://user?id={m.from_user.mention}'><b>Click Here</b></a>')
+            trace_msg = await media.reply_text(f'**User Name:** {m.from_user.mention(style="md")}\n\n**User Id:** `{m.from_user.id}`\n\n <a href="tg://user?id={m.from_user.mention}"><b>Click Here</b></a>')
         except PeerIdInvalid:
             logger.warning("Give the correct Channel or Group ID.")
     replied_m = m
