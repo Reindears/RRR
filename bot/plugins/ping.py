@@ -88,8 +88,6 @@ async def show_ettings(client, message):
     if caption:
         buttons_markup.append([types.InlineKeyboardButton("Show Caption",
                                                           callback_data="showCaption")])
-    buttons_markup.append([types.InlineKeyboardButton("❌ Close",
-                                                      callback_data="closeMessage")])
 
     try:
         await message.reply_text(
