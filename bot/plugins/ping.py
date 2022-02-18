@@ -47,7 +47,7 @@ async def help_handler(c: Client, m: "types.Message"):
              "Speed depends on your media DC.\n\n"
              "To set custom thumbnail send me an image\n\n"
              "To see custom thumbnail press /show_thumbnail\n\n"
-             "/video_info --change-title new title --change-video-title new video title --change-audio-title new audio title --change-subtitle-title new subtitle title --change-file-name new file name",
+             "/video_info --change-title new title-- --change-video-title new video title --change-audio-title new audio title --change-subtitle-title new subtitle title --change-file-name new file name",
     )
 
 @Client.on_message(filters.regex("Settings"))
