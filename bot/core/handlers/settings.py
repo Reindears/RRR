@@ -34,8 +34,6 @@ async def show_settings(m: "types.Message"):
     if caption:
         buttons_markup.append([types.InlineKeyboardButton("Show Caption",
                                                           callback_data="showCaption")])
-    buttons_markup.append([types.InlineKeyboardButton("❌ Close",
-                                                      callback_data="closeMessage")])
 
     try:
         await m.edit(
