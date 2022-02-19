@@ -96,11 +96,13 @@ async def show_ettings(client, message):
             disable_web_page_preview=True,
             parse_mode="Markdown"
         )
-    sleep(20)
-    await pab.delete()
     except errors.MessageNotModified: pass
     except errors.FloodWait as e:
         await asyncio.sleep(e.x)
         await show_settings(m)
     except Exception as err:
         Config.LOGGER.getLogger(__name__).error(err)
+
+    sleep(20)
+    await pab.delete()
+
