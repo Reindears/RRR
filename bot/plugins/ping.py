@@ -38,7 +38,7 @@ async def help_handler(c: Client, m: "types.Message"):
     if not m.from_user:
         return await m.reply_text("I don't know about you sar :(")
     await add_user_to_database(c, m)
-    await c.delete_messages(
+    pablo=await c.delete_messages(
                     chat_id = m.chat.id,
                     message_ids = m.message_id
                 )
@@ -51,7 +51,7 @@ async def help_handler(c: Client, m: "types.Message"):
              "/video_info change-title new title change-video-title new video title change-audio-title new audio title change-subtitle-title new subtitle title change file-name new file name",
     )
     sleep(5)
-    await m.delete()
+    await pablo.delete()
 
 
 @Client.on_message(filters.regex("Settings"))
