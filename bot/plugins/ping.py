@@ -9,7 +9,6 @@ import asyncio
 from pyrogram import types, errors
 from configs import Config
 from bot.core.db.database import db
-from time import sleep
 
 buttonz=ReplyKeyboardMarkup(
             [
@@ -42,7 +41,7 @@ async def help_handler(c: Client, m: "types.Message"):
                     chat_id = m.chat.id,
                     message_ids = m.message_id
                 )
-    pablo=await c.send_flooded_message(
+    await c.send_flooded_message(
         chat_id=m.chat.id,
         text="I can rename media without downloading it!\n"
              "Speed depends on your media DC.\n\n"
@@ -50,9 +49,6 @@ async def help_handler(c: Client, m: "types.Message"):
              "To see custom thumbnail press /show_thumbnail\n\n"
              "/video_info change-title new title change-video-title new video title change-audio-title new audio title change-subtitle-title new subtitle title change file-name new file name",
     )
-    sleep(20)
-    await pablo.delete()
-
 
 @Client.on_message(filters.regex("Settings"))
 async def show_ettings(client, message):
@@ -90,7 +86,7 @@ async def show_ettings(client, message):
                                                           callback_data="showCaption")])
 
     try:
-        pab=await message.reply_text(
+        await message.reply_text(
             text="**Customize Rename Settings:**",
             reply_markup=types.InlineKeyboardMarkup(buttons_markup),
             disable_web_page_preview=True,
@@ -102,7 +98,3 @@ async def show_ettings(client, message):
         await show_settings(m)
     except Exception as err:
         Config.LOGGER.getLogger(__name__).error(err)
-
-    sleep(20)
-    await pab.delete()
-
