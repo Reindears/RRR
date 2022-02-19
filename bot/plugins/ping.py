@@ -50,7 +50,7 @@ async def help_handler(c: Client, m: "types.Message"):
              "To see custom thumbnail press /show_thumbnail\n\n"
              "/video_info change-title new title change-video-title new video title change-audio-title new audio title change-subtitle-title new subtitle title change file-name new file name",
     )
-                sleep(5)
+    sleep(5)
     await m.message.delete()
 
 
