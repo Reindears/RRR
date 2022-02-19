@@ -50,7 +50,7 @@ async def help_handler(c: Client, m: "types.Message"):
              "To see custom thumbnail press /show_thumbnail\n\n"
              "/video_info change-title new title change-video-title new video title change-audio-title new audio title change-subtitle-title new subtitle title change file-name new file name",
     )
-    sleep(5)
+    sleep(20)
     await pablo.delete()
 
 
@@ -90,12 +90,14 @@ async def show_ettings(client, message):
                                                           callback_data="showCaption")])
 
     try:
-        await message.reply_text(
+        pab=await message.reply_text(
             text="**Customize Rename Settings:**",
             reply_markup=types.InlineKeyboardMarkup(buttons_markup),
             disable_web_page_preview=True,
             parse_mode="Markdown"
         )
+    sleep(20)
+    await pab.delete()
     except errors.MessageNotModified: pass
     except errors.FloodWait as e:
         await asyncio.sleep(e.x)
