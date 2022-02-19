@@ -38,11 +38,11 @@ async def help_handler(c: Client, m: "types.Message"):
     if not m.from_user:
         return await m.reply_text("I don't know about you sar :(")
     await add_user_to_database(c, m)
-    pablo=await c.delete_messages(
+    await c.delete_messages(
                     chat_id = m.chat.id,
                     message_ids = m.message_id
                 )
-    await c.send_flooded_message(
+    pablo=await c.send_flooded_message(
         chat_id=m.chat.id,
         text="I can rename media without downloading it!\n"
              "Speed depends on your media DC.\n\n"
