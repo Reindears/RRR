@@ -61,11 +61,9 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
     elif cb.data == "capx":
         await cb.answer()
         chat_id = cb.message.chat.id
-        await cb.message.edit("Send me your custom caption\n\n"
-                              "Press /cancel to cancel process")
+        await cb.message.edit("Send new text for caption!")
         caption = await c.listen(cb.message.chat.id)
-
-        
+        await cb.message.delete()
         await cb.message.reply_to_message.copy(chat_id=chat_id, caption=caption.text)
     elif cb.data == "deleteThumbnail":
         await db.set_thumbnail(cb.from_user.id, None)
