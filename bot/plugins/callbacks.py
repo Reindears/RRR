@@ -62,19 +62,17 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
         chat_id = cb.message.chat.id
         await cb.message.edit("Send me your custom caption\n\n"
                               "Press /cancel to cancel process")
-        cation = await c.listen(cb.message.chat.id)
+        caption = await c.listen(cb.message.chat.id)
         if not caption.text:
-            
-            await caption.reply("No caption found", quote=True)
-            return await get_caption(bot, message)
+            await cb.message.edit("No caption found")
         if caption.text.startswith("/cancel"):
-            await caption.reply("Process cancelled", quote=True)
+            await cb.message.edit("Process cancelled")
             return True
         else:
             return caption.text
         if cation is True:
             return
-        await cb.message.reply_to_message.copy(chat_id=chat_id, caption=cation)
+        await cb.message.reply_to_message.copy(chat_id=chat_id, caption=caption)
     elif cb.data == "deleteThumbnail":
         await db.set_thumbnail(cb.from_user.id, None)
         await cb.answer("Thumbnail set to default", show_alert=True)
