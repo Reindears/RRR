@@ -59,7 +59,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
 
 
     elif cb.data == "capx":
-        chat_id = message.chat.id
+        chat_id = cb.message.chat.id
         await cb.message.edit("Send me your custom caption\n\n"
                               "Press /cancel to cancel process")
         caption = await c.listen(cb.message.chat.id)
