@@ -19,13 +19,13 @@ async def show_settings(m: "types.Message"):
     buttons_markup = [
         [types.InlineKeyboardButton(f"Upload - {'Document' if upload_as_doc else 'Video'}",
                                     callback_data="triggerUploadMode")],
-        [types.InlineKeyboardButton("Set Thumbnail",
+        [types.InlineKeyboardButton("Custom Thumbnail",
                                     callback_data="setThumbnail")],
-        [types.InlineKeyboardButton("Add Caption",
+        [types.InlineKeyboardButton("Custom Caption",
                                     callback_data="setCustomCaption")],
-        [types.InlineKeyboardButton(f"Default Caption {'❌' if caption else '☑️'}",
+        [types.InlineKeyboardButton(f"Default Caption {'OFF' if caption else 'ON'}",
                                     callback_data="triggerApplyDefaultCaption")],
-        [types.InlineKeyboardButton(f"Default Thumbanil {'❌' if thumbnail else '☑️'}",
+        [types.InlineKeyboardButton(f"Default Thumbanil {'OFF' if thumbnail else 'ON'}",
                                     callback_data="deleteThumbnail")]
     ]
     if thumbnail:
