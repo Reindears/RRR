@@ -73,9 +73,9 @@ async def show_ettings(client, message):
                                     callback_data="setThumbnail")],
         [types.InlineKeyboardButton("📚 Custom Caption",
                                     callback_data="setCustomCaption")],
-        [types.InlineKeyboardButton(f"Default Caption {'OFF' if caption else 'ON'}",
+        [types.InlineKeyboardButton(f"Default Caption : {'OFF' if caption else 'ON'}",
                                     callback_data="triggerApplyDefaultCaption")],
-        [types.InlineKeyboardButton(f"Default Thumbanil {'OFF' if thumbnail else 'ON'}",
+        [types.InlineKeyboardButton(f"Default Thumbanil : {'OFF' if thumbnail else 'ON'}",
                                     callback_data="deleteThumbnail")]
     ]
     if thumbnail:
