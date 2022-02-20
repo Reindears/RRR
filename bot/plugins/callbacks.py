@@ -33,7 +33,6 @@ from bot.core.file_info import (
 from bot.core.display import humanbytes
 from bot.core.handlers.settings import show_settings
 
-CAPTION = os.environ.get("CAPTION", None)
 
 
 @Client.on_callback_query()
