@@ -26,7 +26,7 @@ async def ping_handler(c: Client, m: "types.Message"):
     await c.send_flooded_message(
         chat_id=m.chat.id,
         
-        text="👋🏻 Hey, **{}**\n\nI'm a rename bot with multiple functions. Check help for usage\n\nI can rename media without downloading it! Speed depends on your media DC.\n\n**Made With ❤️ By @Sybots**".format(m.from_user.mention),
+        text="Hi {}!\n\nI'm Rename X bot. Just send me any File or Video and I'll rename file and Upload remotely to Telegram.\n\nDon't forget to check Settings before uploading file.".format(m.from_user.mention),
         reply_markup=buttonz
 
     )
