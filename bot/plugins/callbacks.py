@@ -64,7 +64,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
         caption = await c.listen(cb.message.chat.id)
         if caption is True:
             return
-        await message.reply_to_message.copy(chat_id=chat_id, caption=caption)
+        await cb.message.reply_to_message.copy(chat_id=chat_id, caption=caption)
     elif cb.data == "deleteThumbnail":
         await db.set_thumbnail(cb.from_user.id, None)
         await cb.answer("Thumbnail set to default", show_alert=True)
