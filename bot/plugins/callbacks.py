@@ -33,6 +33,8 @@ from bot.core.file_info import (
 from bot.core.display import humanbytes
 from bot.core.handlers.settings import show_settings
 
+CAPTION = os.environ.get("CAPTION", None)
+
 
 @Client.on_callback_query()
 async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
@@ -57,6 +59,13 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
             
 
 
+    elif cb.data == "capx":
+        await cb.message.edit("Send me your custom caption\n\n"
+                              "Press /cancel to cancel process")
+        caption = await c.listen(cb.message.chat.id)
+        if caption is True:
+            return
+        await message.copy(chat_id=chat_id, caption=caption, reply_to_message_id=message.message_id)
     elif cb.data == "deleteThumbnail":
         await db.set_thumbnail(cb.from_user.id, None)
         await cb.answer("Thumbnail set to default", show_alert=True)
