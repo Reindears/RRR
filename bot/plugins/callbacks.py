@@ -62,12 +62,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
         chat_id = cb.message.chat.id
         await cb.message.edit("Send me your custom caption\n\n"
                               "Press /cancel to cancel process")
-        caption = await c.ask(cb.message.chat.id)
-        if caption.text.startswith("/cancel"):
-            await cb.message.edit("Process cancelled")
-            return
-        else:
-            return caption.text
+        caption = await c.listen(cb.message.chat.id)
         if cation is True:
             return
         await cb.message.reply_to_message.copy(chat_id=chat_id, caption=caption)
