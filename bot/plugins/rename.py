@@ -59,8 +59,8 @@ async def renamestart(c: Client, m: Message):
     await m.reply_text(
         text=text,
         reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("Rename", callback_data="rename"),
-              InlineKeyboardButton("Cancel", callback_data="closeMessage")]
+            [[InlineKeyboardButton("✏️ Rename", callback_data="rename"),
+              InlineKeyboardButton("📄 Caption", callback_data="capx")]
             ]
         ),
         disable_web_page_preview=True,
