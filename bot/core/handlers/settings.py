@@ -23,8 +23,6 @@ async def show_settings(m: "types.Message"):
                                     callback_data="setThumbnail")],
         [types.InlineKeyboardButton("📚 Custom Caption",
                                     callback_data="setCustomCaption")],
-        [types.InlineKeyboardButton("📸 Screenshot : OFF",
-                                    callback_data="setCustomCaptiojhn")],
         [types.InlineKeyboardButton(f"Default Caption : {'OFF' if caption else 'ON'}",
                                     callback_data="triggerApplyDefaultCaption")],
         [types.InlineKeyboardButton(f"Default Thumbanil : {'OFF' if thumbnail else 'ON'}",
