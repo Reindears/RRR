@@ -50,7 +50,7 @@ async def help_handler(c: Client, m: "types.Message"):
              "/video_info change-title new title change-video-title new video title change-audio-title new audio title change-subtitle-title new subtitle title change file-name new file name",
     )
 
-@Client.on_message(filters.regex("Settings") & filters.command(["settings"]))
+@Client.on_message(filters.regex("Settings")) & filters.command(["settings"])
 async def show_ettings(client, message):
     usr_id = message.chat.id
     await client.delete_messages(
