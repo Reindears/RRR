@@ -4,7 +4,6 @@ RUN pacman -Syyu --noconfirm
 
 RUN pacman -Syu --noconfirm jre8-openjdk-headless ffmpeg unzip
 
-RUN pip3 install -U pip
 RUN mkdir /app/
 WORKDIR /app/
 COPY . /app/
