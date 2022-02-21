@@ -64,7 +64,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
         await cb.message.edit("Send new text for caption!")
         caption = await c.listen(cb.message.chat.id)
         await cb.message.delete()
-        await cb.message.reply_to_message.copy(chat_id=chat_id, caption=caption.text)
+        await cb.message.reply_to_message.copy(chat_id=chat_id, caption=caption.text.markdown)
     elif cb.data == "deleteThumbnail":
         await db.set_thumbnail(cb.from_user.id, None)
         await cb.answer("Thumbnail set to default", show_alert=True)
