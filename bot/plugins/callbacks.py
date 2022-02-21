@@ -73,8 +73,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
         await cb.answer("Ok, Send me an image", show_alert=True)
     elif cb.data == "setCustomCaption":
         await cb.answer()
-        await cb.message.edit("Send me your custom caption\n\n"
-                              "Press /cancel to cancel process")
+        await cb.message.edit("Now, send me your custom caption!")
         user_input_msg: "types.Message" = await c.listen(cb.message.chat.id)
         if not user_input_msg.text:
             await cb.message.edit("Process Cancelled!")
@@ -140,7 +139,7 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
         await cb.message.delete(True)
         
     elif cb.data == "rename":
-        editable = await cb.message.edit("Now send me new file name")
+        editable = await cb.message.edit("Now send me new file name!")
         user_input_msg: Message = await c.listen(cb.message.chat.id)
         if user_input_msg.text is None:
           await editable.edit("Process Cancelled!")
