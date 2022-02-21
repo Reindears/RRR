@@ -3,12 +3,11 @@ FROM archlinux:latest
 RUN pacman -Syyu --noconfirm
 
 RUN pacman -Syu --noconfirm jre8-openjdk-headless ffmpeg unzip
-
+RUN pacman -S --noconfirm python-pip zstd p7zip gcc
+RUN pip3 install -U pip
+RUN mkdir /app/
 WORKDIR /app/
-COPY requirements.txt requirements.txt
+COPY . /app/
+RUN pip3 install -U setuptools
+RUN pip3 install -U -r requirements.txt
 
-RUN pip3 install -r requirements.txt
-
-COPY . .
-
-CMD python3 -m bot
