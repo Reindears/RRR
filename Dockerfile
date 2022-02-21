@@ -11,3 +11,4 @@ COPY . /app/
 RUN pip3 install -U setuptools
 RUN pip3 install -U -r requirements.txt
 
+CMD python3 -m bot
