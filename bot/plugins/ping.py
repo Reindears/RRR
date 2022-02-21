@@ -92,7 +92,7 @@ async def show_ettings(client, message):
 
     try:
         await message.reply_text(
-            text="**Customize Rename Settings:**",
+            text="**Customize Rename Settings :-**",
             reply_markup=types.InlineKeyboardMarkup(buttons_markup),
             disable_web_page_preview=True,
             parse_mode="Markdown"
