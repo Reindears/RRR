@@ -129,6 +129,13 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
     elif cb.data == "closeMessage":
         await cb.message.delete(True)
         
+    elif cb.data == "capx":
+        await cb.answer()
+        chat_id = cb.message.chat.id
+        await cb.message.edit("Send new text for caption!")
+        capton = await c.listen(cb.message.chat.id)
+        await cb.message.delete()
+        await cb.message.reply_to_message.copy(chat_id=chat_id, caption=capton.text.markdown)
     elif cb.data == "rename":
         editable = await cb.message.edit("Now send me new file name!")
         user_input_msg: Message = await c.listen(cb.message.chat.id)
@@ -181,10 +188,4 @@ async def cb_handlers(c: Client, cb: "types.CallbackQuery"):
                             f"**Error:** `{err}`\n\n"
                             f"**Traceback:** `{traceback.format_exc()}`")
 
-    elif cb.data == "capx":
-        await cb.answer()
-        chat_id = cb.message.chat.id
-        await cb.message.edit("Send new text for caption!")
-        capton = await c.listen(cb.message.chat.id)
-        await cb.message.delete()
-        await cb.message.reply_to_message.copy(chat_id=chat_id, caption=capton.text.markdown)
+
