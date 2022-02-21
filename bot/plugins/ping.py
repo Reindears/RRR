@@ -43,16 +43,16 @@ async def help_handler(c: Client, m: "types.Message"):
                 )
     await c.send_flooded_message(
         chat_id=m.chat.id,
-        text="""📖 Help Module
+        text="""**📖 Help Module**
 
 I can rename media without downloading it!
 Speed depends on your media DC
 
-📚 Avaible Commands
+**📚 Avaible Commands**
 
 /show_thumbnail - Show Custom Thumbnail
 /delete_thumbnail - Delete Custom Thumbnail
-/video_info - change-title new title change-video-title new video title change-audio-title new audio title change-subtitle-title new subtitle title change file-name new file name""",
+/video_info - Change Video Information""",
     )
 
 @Client.on_message(filters.regex("Settings"))
