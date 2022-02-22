@@ -1,6 +1,7 @@
 FROM archlinux:latest
 RUN pacman -Syyu --noconfirm
 RUN pacman -Syu --noconfirm jre8-openjdk-headless ffmpeg unzip
+RUN pacman -S --noconfirm python-pip zstd p7zip gcc
 RUN pip3 install -U pip
 RUN mkdir /app/
 WORKDIR /app/
